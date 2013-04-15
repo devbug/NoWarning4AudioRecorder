@@ -1,0 +1,28 @@
+#!/bin/sh
+
+rm -f /Library/MobileSubstrate/DynamicLibraries/callrecorder.dylib
+mv "/Library/Application Support/CallRecorderPatch/callrecorder.dylib.bak" /Library/MobileSubstrate/DynamicLibraries/callrecorder.dylib
+
+if [ -f "/Library/Application Support/CallRecorderPatch/ko.Localizable.strings.bak" ]; then
+	rm -rf /Library/PreferenceBundles/CallRecorderPreferences.bundle/ko.lproj/Localizable.strings
+	rm -rf /Library/PreferenceBundles/CallRecorderPreferences.bundle/ko.lproj/warning.caf
+	mv "/Library/Application Support/CallRecorderPatch/ko.Localizable.strings.bak" /Library/PreferenceBundles/CallRecorderPreferences.bundle/ko.lproj/Localizable.strings
+	mv "/Library/Application Support/CallRecorderPatch/ko.warning.caf.bak" /Library/PreferenceBundles/CallRecorderPreferences.bundle/ko.lproj/warning.caf
+fi
+
+if [ -f "/Library/Application Support/CallRecorderPatch/en.Localizable.strings.bak" ]; then
+	rm -rf /Library/PreferenceBundles/CallRecorderPreferences.bundle/en.lproj/Localizable.strings
+	rm -rf /Library/PreferenceBundles/CallRecorderPreferences.bundle/en.lproj/warning.caf
+	mv "/Library/Application Support/CallRecorderPatch/en.Localizable.strings.bak" /Library/PreferenceBundles/CallRecorderPreferences.bundle/en.lproj/Localizable.strings
+	mv "/Library/Application Support/CallRecorderPatch/en.warning.caf.bak" /Library/PreferenceBundles/CallRecorderPreferences.bundle/en.lproj/warning.caf
+fi
+
+if [ -f "/Library/Application Support/CallRecorderPatch/ja.Localizable.strings.bak" ]; then
+	rm -rf /Library/PreferenceBundles/CallRecorderPreferences.bundle/ja.lproj/Localizable.strings
+	rm -rf /Library/PreferenceBundles/CallRecorderPreferences.bundle/ja.lproj/warning.caf
+	mv "/Library/Application Support/CallRecorderPatch/ja.Localizable.strings.bak" /Library/PreferenceBundles/CallRecorderPreferences.bundle/ja.lproj/Localizable.strings
+	mv "/Library/Application Support/CallRecorderPatch/ja.warning.caf.bak" /Library/PreferenceBundles/CallRecorderPreferences.bundle/ja.lproj/warning.caf
+fi
+
+exit 0;
+
