@@ -1,13 +1,14 @@
-Package: me.devbug.nowarningko
-Name: NoWarning Audio Recorder
-Depends: net.limneos.callrecorder (>= 0.2-242), mobilesubstrate, com.ericasadun.utilities
-Version: 0.0.1
+Package: me.devbug.nowarningko2
+Name: NoWarning2 Audio Recorder
+Depends: net.limneos.callrecorder (>= 0.4-22), mobilesubstrate, com.ericasadun.utilities
+Version: 0.0.2
 Architecture: iphoneos-arm
 Description: Patch warning sound to mute for Audio Recorder
  Patch warning sound to mute for Audio Recoder
-
+ 
  This package supports only Korean, English and Japanese.
 Maintainer: deVbug <devbug@devbug.me>
 Author: deVbug <devbug@devbug.me>
 Section: System
 Tag: role::hacker
+Conflicts: me.devbug.nowarningko

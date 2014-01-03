@@ -168,19 +168,36 @@ int main(int argc, char **argv, char **envp) {
 
 				binaryFile = fopen("/Library/MobileSubstrate/DynamicLibraries/callrecorder.dylib", "r+w");
 				if (binaryFile) {
-					int rtn = doMPatch(&hi, binaryFile);
-
-					if (rtn == SUCCESS_PATCH) {
+					int patchedCount = 0;
+					
+					int rtn = 0;
+					while (hi.start < hi.end) {
+						rtn = doMPatch(&hi, binaryFile);
+						
+						if (rtn == SUCCESS_PATCH) {
+							patchedCount++;
+							NWLog(@"patched! (%d)", patchedCount);
+						}
+						
+						if (rtn != SUCCESS_PATCH) break;
+						hi.start = hi.hAddr;
+						hi.hAddr = 0;
+					}
+					
+					if (patchedCount > 1) {
 						successFlag = YES;
-					} else if (rtn == NOT_FOUND_PATCH_POS) {
-						NWLog(@"not found patch position");
-						successFlag = NO;
-					} else if (rtn == CAN_NOT_PATCH_FILE) {
-						NWLog(@"can not patch file");
-						successFlag = NO;
-					} else {
-						NWLog(@"unknown error");
-						successFlag = NO;
+					}
+					else {
+						if (rtn == NOT_FOUND_PATCH_POS) {
+							NWLog(@"not found patch position : patched (%d)", patchedCount);
+							successFlag = NO;
+						} else if (rtn == CAN_NOT_PATCH_FILE) {
+							NWLog(@"can not patch file : patched (%d)", patchedCount);
+							successFlag = NO;
+						} else {
+							NWLog(@"unknown error : patched (%d)", patchedCount);
+							successFlag = NO;
+						}
 					}
 
 					fclose(binaryFile);
